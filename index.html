@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wat eten we vanavond? | RandomRadar</title>
     <style>
-        /* Kleurenpalet: Warm Oranje & Modern Grijs */
         :root {
-            --primary: #f36d21; /* Smakelijk oranje */
+            --primary: #f36d21;
             --primary-dark: #d35400;
             --bg-light: #fdfdfd;
             --text-dark: #2c3e50;
@@ -17,7 +16,6 @@
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: #f5f5f5;
-            /* Subtiele achtergrondpatroon voor meer body */
             background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
             color: var(--text-dark);
             display: flex;
@@ -108,6 +106,7 @@
             cursor: pointer;
             border: none;
             width: 100%;
+            text-align: center;
         }
 
         .seo-footer {
@@ -120,7 +119,6 @@
             text-align: center;
         }
 
-        /* Responsive tweak */
         @media (max-width: 480px) {
             h1 { font-size: 1.8rem; }
             .card { padding: 2rem; }
@@ -131,7 +129,7 @@
 
 <div class="card">
     <h1>Wat eten we vandaag?</h1>
-    <p class="subtitle">Geen keuzestress meer. Klik en eet!</p>
+    <p class="subtitle">Geen keuzestress meer voor RandomRadar. Klik en eet!</p>
     
     <div id="display-container">
         <p id="uitkomst">Kies een maaltijd...</p>
@@ -144,25 +142,18 @@
 <section class="seo-footer">
     <p>
         Heb je <strong>geen inspiratie voor het avondeten</strong>? Gebruik de RandomRadar <strong>wat eten we generator</strong>. 
-        Of je nu zin hebt in iets gezonds of een snelle hap, onze tool helpt je direct beslissen.
+        Van snelle hap tot klassieke gerechten, onze tool helpt je direct beslissen wat er op tafel komt.
     </p>
 </section>
 
 <script>
     function kiesMaaltijd() {
         const maaltijden = [
-            "Knapperige Pizza 🍕",
-            "Verse Pasta Carbonara 🍝",
-            "Sushi Schotel 🍣",
-            "Gezonde Maaltijdsalade 🥗",
-            "Frietjes van de frituur 🍟",
-            "Gegrilde Burgers 🍔",
-            "Pittige Thaise Curry 🍛",
-            "Hollandse Stamppot 🥔",
-            "Zelfgebakken Pannenkoeken 🥞",
-            "Taco's met alles erop 🌮",
-            "Poké Bowl met zalm 🥣",
-            "Broodje Kebab 🥙"
+            "Pizza 🍕", "Pasta Carbonara 🍝", "Sushi 🍣", "Frietjes van de frituur 🍟",
+            "Burgers 🍔", "Thais 🍛", "Stoemp 🥔", "Pannenkoeken 🥞",
+            "Taco's 🌮", "Poke Bowl 🥣", "Kebab 🥙", "Spaghetti Bolognese 🍝",
+            "Lasagne 🥘", "Pasta met scampi 🍤", "McDonald's 🍔", "Grieks 🇬🇷",
+            "Uit eten gaan ✨", "Chinees 🥡", "Burger King 👑", "Wraps 🌯", "KFC 🍗"
         ];
 
         const display = document.getElementById('uitkomst');
@@ -186,7 +177,7 @@
 
     function deelResultaat() {
         const keuze = document.getElementById('uitkomst').innerText;
-        const tekst = "Het lot heeft beslist! We eten: " + keuze + ". Check het hier: " + window.location.href;
+        const tekst = "RandomRadar heeft beslist! We eten: " + keuze + ". Check het hier: " + window.location.href;
         window.open("https://wa.me/?text=" + encodeURIComponent(tekst), '_blank');
     }
 </script>
