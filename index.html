@@ -3,108 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wat eten we vanavond? - De Willekeurige Eten Generator</title>
+    <title>Wat eten we vanavond? | RandomRadar</title>
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent-color: #22c55e; /* Radar Groen */
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(34, 197, 94, 0.05) 1px, transparent 0);
+            background-size: 40px 40px; /* Subtiel radar-grid */
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            color: #333;
+            overflow-x: hidden;
         }
+
         .container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             text-align: center;
-            max-width: 450px;
+            max-width: 480px;
             width: 90%;
+            position: relative;
         }
-        h1 { color: #ff4757; font-size: 1.8rem; margin-bottom: 0.5rem; }
-        .subtitle { color: #7f8c8d; margin-bottom: 1.5rem; }
+
+        /* Radar scan effect */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--accent-color), transparent, var(--accent-color));
+            z-index: -1;
+            border-radius: 26px;
+            opacity: 0.15;
+        }
+
+        h1 { 
+            font-size: 2rem; 
+            margin-bottom: 0.5rem; 
+            letter-spacing: -0.025em;
+            text-transform: uppercase;
+        }
+
+        .subtitle { color: var(--text-dim); margin-bottom: 2rem; font-size: 0.95rem; }
+
         #resultaat-box {
-            height: 120px;
+            height: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px 0;
-            border: 3px dashed #ff4757;
-            border-radius: 15px;
-            background-color: #fffafb;
+            margin-bottom: 2rem;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 16px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            position: relative;
+            overflow: hidden;
         }
-        #uitkomst { font-size: 1.4rem; font-weight: bold; color: #2f3542; padding: 0 10px; }
-        
+
+        #uitkomst {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+
         .main-btn {
-            background-color: #ff4757;
-            color: white;
+            background-color: var(--accent-color);
+            color: #052e16;
             border: none;
-            padding: 18px 35px;
-            font-size: 1.2rem;
-            border-radius: 50px;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+            font-weight: 800;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        .main-btn:hover { background-color: #ff6b81; transform: scale(1.05); }
 
-        /* De WhatsApp knop (staat eerst verborgen) */
+        .main-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(34, 197, 94, 0.4);
+            filter: brightness(1.1);
+        }
+
         .whatsapp-btn {
-            background-color: #25D366;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 15px;
-            display: none; 
-            transition: transform 0.2s;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
+            display: none;
+            margin-top: 1rem;
+            color: var(--accent-color);
             text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .whatsapp-btn:hover { transform: scale(1.05); background-color: #20bd5a; }
 
-        .seo-section { margin-top: 3rem; max-width: 600px; padding: 20px; text-align: left; font-size: 0.9rem; line-height: 1.6; color: #555; }
+        .whatsapp-btn:hover {
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .seo-section {
+            margin-top: 4rem;
+            max-width: 600px;
+            padding: 20px;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Wat eten we vanavond? 🍽️</h1>
-    <p class="subtitle">Geen inspiratie? Onze generator beslist voor jou.</p>
+    <h1>RandomRadar 📡</h1>
+    <p class="subtitle">Scan voltooid. Wat schaft de pot?</p>
     
     <div id="resultaat-box">
-        <p id="uitkomst">Klaar om te kiezen?</p>
+        <p id="uitkomst">SYSTEM READY</p>
     </div>
 
-    <button class="main-btn" onclick="kiesEten()">Beslis voor mij!</button>
-    
-    <div id="share-container">
-        <button id="share-btn" class="whatsapp-btn" onclick="deelViaWhatsapp()">Stuur naar partner 📱</button>
-    </div>
+    <button class="main-btn" onclick="kiesEten()">Start Scan</button>
+    <button id="share-btn" class="whatsapp-btn" onclick="deelViaWhatsapp()">Verstuur coördinaten (WhatsApp)</button>
 </div>
 
 <section class="seo-section">
-    <h2>Geen inspiratie voor het avondeten?</h2>
-    <p>
-        Iedere dag is het weer dezelfde vraag: <strong>"Wat eten we vanavond?"</strong>. Onze 
-        <strong>wat eten we generator</strong> helpt je direct uit de brand met <em>snel en makkelijk eten</em>.
-    </p>
+    <p><strong>Wat eten we vanavond?</strong> Gebruik de RandomRadar maaltijd-generator voor directe inspiratie. Onze algoritmes kiezen willekeurig uit de beste gerechten, van snelle snacks tot gezonde maaltijden. Perfect voor als je even geen keuze kunt maken.</p>
 </section>
 
 <script>
     function kiesEten() {
         const opties = [
-            "Pizza 🍕", "Verse Pasta 🍝", "Sushi 🍣", "Gezonde Salade 🥗", 
-            "Frietjes van de frituur 🍟", "Burgers 🍔", "Thais bestellen 🍛", 
-            "Stamppot 🥔", "Pannenkoeken 🥞", "Taco's 🌮"
+            "PIZZA NIGHT 🍕", "PASTA PESTO 🍝", "SUSHI ROLL 🍣", "GEZONDE SALADE 🥗", 
+            "FRIET MET SNACK 🍟", "DOUBLE BURGER 🍔", "THAIS CURRY 🍛", 
+            "STAMPPOT 🥔", "PANNENKOEKEN 🥞", "TACO FEAST 🌮", "KAPSALON 🥙", "POKÉ BOWL 🥣"
         ];
 
         const display = document.getElementById('uitkomst');
@@ -112,25 +166,26 @@
         const mainBtn = document.querySelector('.main-btn');
         
         mainBtn.disabled = true;
+        mainBtn.innerText = "SCANNING...";
+        
         let count = 0;
         const interval = setInterval(() => {
             display.innerText = opties[Math.floor(Math.random() * opties.length)];
             count++;
-            if (count > 12) {
+            if (count > 15) {
                 clearInterval(interval);
-                const finale = Math.floor(Math.random() * opties.length);
-                display.innerText = opties[finale];
+                display.innerText = opties[Math.floor(Math.random() * opties.length)];
                 mainBtn.disabled = false;
-                shareBtn.style.display = 'inline-block'; // Laat de deelknop zien
+                mainBtn.innerText = "RE-SCAN";
+                shareBtn.style.display = 'block';
             }
-        }, 60);
+        }, 50);
     }
 
     function deelViaWhatsapp() {
         const keuze = document.getElementById('uitkomst').innerText;
-        const tekst = "Het lot heeft beslist! We eten vanavond: " + keuze + ". Bekijk het hier: " + window.location.href;
-        const url = "https://wa.me/?text=" + encodeURIComponent(tekst);
-        window.open(url, '_blank');
+        const tekst = "RandomRadar heeft beslist! We eten: " + keuze + ". Check het hier: " + window.location.href;
+        window.open("https://wa.me/?text=" + encodeURIComponent(tekst), '_blank');
     }
 </script>
 
