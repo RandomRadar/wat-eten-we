@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wie moet het doen? | Namen Loten & Loting Generator - RandomRadar</title>
-    <meta name="description" content="Eenvoudig namen loten voor taken, ritten of spellen. Voer de namen in en de radar kiest willekeurig wie er aan de beurt is.">
+    <title>Wie moet het doen? | Online Namen Loten - RandomRadar</title>
+    <meta name="description" content="Snel en eerlijk namen loten voor taken of ritten. De ideale loting generator voor vriendengroepen en op kantoor.">
     <style>
-        :root { --primary: #f36d21; --dark: #2c3e50; }
-        body { font-family: sans-serif; background: #f5f5f5; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        :root { --primary: #f36d21; --dark: #2c3e50; --whatsapp: #25D366; }
+        body { font-family: sans-serif; background: #f5f5f5; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; color: #333; }
         nav { background: white; width: 100%; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
         nav a { text-decoration: none; color: var(--dark); font-weight: bold; font-size: 0.85rem; padding: 8px 12px; border-radius: 5px; }
         nav a.active { background: var(--primary); color: white; }
         .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 90%; margin-top: 40px; border-top: 5px solid var(--primary); }
         textarea { width: 100%; height: 80px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; padding: 10px; box-sizing: border-box; font-family: inherit; }
         #winnaar { font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 20px 0; min-height: 1.5em; }
-        button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; }
+        button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1rem; }
+        .whatsapp-btn { margin-top: 20px; background: var(--whatsapp); color: white; padding: 12px; font-size: 0.9rem; cursor: pointer; border-radius: 10px; border: none; width: 100%; font-weight: bold; }
         .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.9rem; color: #666; }
     </style>
 </head>
@@ -30,19 +31,24 @@
     <textarea id="lijst" placeholder="Typ namen (Jan, Marie, Piet...)"></textarea>
     <div id="winnaar">...</div>
     <button onclick="loot()">LAAT DE RADAR KIEZEN</button>
+    <button class="whatsapp-btn" onclick="shareWhatsApp()">Stuur resultaat naar de groep 💬</button>
 </div>
 <div class="seo-content">
-    <h2>Online namen loten en keuzes maken</h2>
-    <p>Wil je eerlijk <strong>namen loten</strong> voor een taakje of een spel? Onze <strong>loting generator</strong> is de snelste manier om een willekeurige winnaar (of verliezer) aan te wijzen. Ideaal voor vriendengroepen die willen beslissen wie er moet rijden, of voor op het werk om te bepalen wie de volgende meeting begint.</p>
+    <h2>Online namen loten was nog nooit zo makkelijk</h2>
+    <p>Wil je eerlijk en willekeurig <strong>namen loten</strong> voor een taakje of een spel? Onze <strong>loting generator</strong> is de ideale tool voor vriendengroepen. Of je nu wilt beslissen wie er moet bobben of wie er trakteert, de RandomRadar wijst de winnaar (of verliezer) direct aan. Geen discussie meer mogelijk!</p>
 </div>
 <script>
     function loot() {
         const n = document.getElementById("lijst").value.split(',').map(x => x.trim()).filter(x => x !== "");
-        if(n.length < 2) return alert("Vul minstens 2 namen in gescheiden door een komma!");
+        if(n.length < 2) return alert("Vul minstens 2 namen in!");
         document.getElementById("winnaar").innerText = "De radar kiest...";
         setTimeout(() => {
             document.getElementById("winnaar").innerText = "👉 " + n[Math.floor(Math.random() * n.length)];
         }, 600);
+    }
+    function shareWhatsApp() {
+        const text = "De radar heeft beslist wie het moet doen! Check het hier: " + window.location.href;
+        window.open("https://wa.me/?text=" + encodeURIComponent(text));
     }
 </script>
 </body>
