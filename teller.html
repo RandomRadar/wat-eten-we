@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dagen Teller | RandomRadar</title>
+    <style>
+        :root { --primary: #f36d21; --dark: #2c3e50; }
+        body { font-family: sans-serif; background: #f5f5f5; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        nav { background: white; width: 100%; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; position: sticky; top: 0; z-index: 100; }
+        nav a { text-decoration: none; color: var(--dark); font-weight: bold; font-size: 0.9rem; padding: 8px 15px; border-radius: 5px; transition: 0.3s; }
+        nav a.active { background: var(--primary); color: white; }
+        nav a:hover:not(.active) { background: #eee; }
+
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 90%; margin-top: 50px; border-top: 5px solid var(--primary); }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; font-size: 0.8rem; color: #777; margin-bottom: 5px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
+        .resultaat { margin-top: 20px; padding: 15px; background: #fff8f4; border-radius: 10px; display: none; }
+        .resultaat strong { color: var(--primary); font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">🍴 Wat eten we?</a>
+    <a href="teller.html" class="active">📅 Dagen Teller</a>
+</nav>
+
+<div class="card">
+    <h1>Dagen Teller 📅</h1>
+    <div class="input-group">
+        <label>Startdatum</label>
+        <input type="date" id="start">
+    </div>
+    <div class="input-group">
+        <label>Einddatum (bijv. Kerst of vakantie)</label>
+        <input type="date" id="eind">
+    </div>
+    <button onclick="reken()">BEREKEN VERSCHIL</button>
+
+    <div id="box" class="resultaat">
+        Totaal dagen: <strong id="totaal">0</strong><br>
+        Werkdagen: <strong id="werk">0</strong>
+    </div>
+</div>
+
+<script>
+    document.getElementById('start').valueAsDate = new Date();
+    function reken() {
+        const s = new Date(document.getElementById('start').value);
+        const e = new Date(document.getElementById('eind').value);
+        if(isNaN(s) || isNaN(e)) return alert("Kies data!");
+        
+        const diff = Math.ceil((e - s) / (1000 * 60 * 60 * 24));
+        let w = 0;
+        let t = new Date(s);
+        while(t < e) {
+            t.setDate(t.getDate() + 1);
+            if(t.getDay() !== 0 && t.getDay() !== 6) w++;
+        }
+        document.getElementById('totaal').innerText = diff;
+        document.getElementById('werk').innerText = w;
+        document.getElementById('box').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
