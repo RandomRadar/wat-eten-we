@@ -7,15 +7,14 @@
     <style>
         :root { --primary: #f36d21; --bg: #1a1a1a; --card: #2d2d2d; --text: #eeeeee; --whatsapp: #25D366; }
         body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; color: var(--text); }
-        nav { background: #111; width: 100%; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.5); display: flex; justify-content: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
-        nav a { text-decoration: none; color: #888; font-weight: bold; font-size: 0.85rem; padding: 8px 12px; border-radius: 5px; }
+        nav { background: #111; width: 100%; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.5); display: flex; justify-content: center; gap: 8px; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
+        nav a { text-decoration: none; color: #888; font-weight: bold; font-size: 0.75rem; padding: 8px 10px; border-radius: 5px; }
         nav a.active { background: var(--primary); color: white; }
-        .card { background: var(--card); padding: 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center; max-width: 400px; width: 90%; margin-top: 40px; border-bottom: 5px solid var(--primary); }
+        .card { background: var(--card); padding: 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center; max-width: 400px; width: 90%; margin-top: 30px; border-bottom: 5px solid var(--primary); }
         textarea { width: 100%; height: 80px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #444; padding: 10px; background: #333; color: white; font-family: inherit; }
         #winnaar { font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 20px 0; min-height: 1.5em; }
         button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1rem; }
         .whatsapp-btn { margin-top: 20px; background: var(--whatsapp); color: white; padding: 12px; font-size: 0.9rem; cursor: pointer; border-radius: 10px; border: none; width: 100%; font-weight: bold; }
-        .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.9rem; color: #aaa; border-top: 1px solid #333; padding-top: 20px; }
     </style>
 </head>
 <body>
@@ -23,35 +22,28 @@
     <a href="index.html">🍴 Eten</a>
     <a href="teller.html">📅 Teller</a>
     <a href="wie.html" class="active">🎯 Wie?</a>
+    <a href="doen.html">🎡 Doen?</a>
+    <a href="munt.html">🪙 Munt</a>
 </nav>
 <div class="card">
     <h1>Wie is de Sjaak? 🎯</h1>
-    <textarea id="lijst" placeholder="Namen met komma's..."></textarea>
+    <textarea id="lijst" placeholder="Namen gescheiden door komma's..."></textarea>
     <div id="winnaar">...</div>
     <button onclick="loot()">START LOTING</button>
-    <button class="whatsapp-btn" onclick="shareWhatsApp()">Stuur naar groep 💬</button>
-</div>
-<div class="seo-content">
-    <p>Snel en eerlijk <strong>namen loten</strong> met de loting generator van RandomRadar.</p>
+    <button class="whatsapp-btn" onclick="share()">Stuur naar groep 💬</button>
 </div>
 <script>
     function loot() {
         const n = document.getElementById("lijst").value.split(',').map(x => x.trim()).filter(x => x !== "");
         if(n.length < 2) return alert("Vul minstens 2 namen in!");
-        const win = document.getElementById("winnaar");
         let count = 0;
         const interval = setInterval(() => {
-            win.innerText = n[Math.floor(Math.random() * n.length)];
+            document.getElementById("winnaar").innerText = n[Math.floor(Math.random() * n.length)];
             count++;
-            if(count > 12) {
-                clearInterval(interval);
-                win.innerText = "👉 " + n[Math.floor(Math.random() * n.length)];
-            }
+            if(count > 12) { clearInterval(interval); document.getElementById("winnaar").innerText = "👉 " + n[Math.floor(Math.random() * n.length)]; }
         }, 70);
     }
-    function shareWhatsApp() {
-        window.open("https://wa.me/?text=De radar heeft beslist! " + window.location.href);
-    }
+    function share() { window.open("https://wa.me/?text=De radar heeft gekozen: " + window.location.href); }
 </script>
 </body>
 </html>
