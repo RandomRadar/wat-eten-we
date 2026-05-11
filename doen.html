@@ -31,12 +31,23 @@
     <button class="whatsapp-btn" onclick="share()">Deel idee 💬</button>
 </div>
 <script>
-    const lijst = ["Boswandeling 🌲", "Bioscoopje 🍿", "Terrasje pakken 🍺", "Museum bezoek 🎨", "Gamen 🎮", "Uitgebreid koken 👨‍🍳", "Stedentrip 🚲", "Boardgame avond 🎲", "Sporten 🏃‍♂️", "Wellness 🧖‍♀️"];
+    const lijst = [
+        "Boswandeling 🌲", "Bioscoopje 🍿", "Terrasje pakken 🍺", "Museum bezoek 🎨", 
+        "Gamen 🎮", "Uitgebreid koken 👨‍🍳", "Stedentrip 🚲", "Boardgame avond 🎲", 
+        "Sporten 🏃‍♂️", "Wellness 🧖‍♀️", "Huis opruimen ✨", "Powernap doen 💤", 
+        "Boek lezen 📚", "Podcast luisteren 🎧", "Tuinieren 🪴", "Netflixen 🎬", 
+        "Foto's sorteren 📸", "Bakken (taart!) 🥧", "Puzzelen 🧩", "Shoppen 🛍️"
+    ];
+    let vorigDoen = "";
     function kiesDoen() {
         let c = 0;
         const t = setInterval(() => {
             document.getElementById("res").innerText = lijst[Math.floor(Math.random()*lijst.length)];
-            c++; if(c>12) clearInterval(t);
+            if(++c>12) { 
+                clearInterval(t); 
+                let n; do { n = lijst[Math.floor(Math.random() * lijst.length)]; } while (n === vorigDoen);
+                vorigDoen = n; document.getElementById("res").innerText = n;
+            }
         }, 70);
     }
     function share() { window.open("https://wa.me/?text=Laten we dit doen: " + window.location.href); }
