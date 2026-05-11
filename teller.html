@@ -7,15 +7,15 @@
     <style>
         :root { --primary: #f36d21; --bg: #1a1a1a; --card: #2d2d2d; --text: #eeeeee; --whatsapp: #25D366; }
         body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; color: var(--text); }
-        nav { background: #111; width: 100%; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.5); display: flex; justify-content: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
-        nav a { text-decoration: none; color: #888; font-weight: bold; font-size: 0.85rem; padding: 8px 12px; border-radius: 5px; }
+        nav { background: #111; width: 100%; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.5); display: flex; justify-content: center; gap: 8px; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
+        nav a { text-decoration: none; color: #888; font-weight: bold; font-size: 0.75rem; padding: 8px 10px; border-radius: 5px; }
         nav a.active { background: var(--primary); color: white; }
-        .card { background: var(--card); padding: 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center; max-width: 400px; width: 90%; margin-top: 40px; border-bottom: 5px solid var(--primary); }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #444; border-radius: 8px; box-sizing: border-box; background: #333; color: white; }
+        .card { background: var(--card); padding: 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center; max-width: 400px; width: 90%; margin-top: 30px; border-bottom: 5px solid var(--primary); }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #444; border-radius: 8px; background: #333; color: white; }
         button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1rem; }
-        .res { margin-top: 20px; font-size: 1.5rem; font-weight: bold; color: var(--primary); background: #3a3a3a; padding: 15px; border-radius: 10px; display: none; }
+        #out { margin-top: 20px; font-size: 1.5rem; font-weight: bold; color: var(--primary); background: #3a3a3a; padding: 15px; border-radius: 10px; display: none; }
         .whatsapp-btn { margin-top: 20px; background: var(--whatsapp); color: white; padding: 12px; font-size: 0.9rem; cursor: pointer; border-radius: 10px; border: none; width: 100%; font-weight: bold; }
-        .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.9rem; color: #aaa; border-top: 1px solid #333; padding-top: 20px; }
+        .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.85rem; color: #aaa; border-top: 1px solid #333; padding-top: 20px; }
     </style>
 </head>
 <body>
@@ -23,17 +23,19 @@
     <a href="index.html">🍴 Eten</a>
     <a href="teller.html" class="active">📅 Teller</a>
     <a href="wie.html">🎯 Wie?</a>
+    <a href="doen.html">🎡 Doen?</a>
+    <a href="munt.html">🪙 Munt</a>
 </nav>
 <div class="card">
     <h1>Dagen Teller 📅</h1>
     <input type="date" id="start">
     <input type="date" id="eind">
     <button onclick="reken()">BEREKEN DAGEN</button>
-    <div id="out" class="res"></div>
-    <button class="whatsapp-btn" onclick="shareWhatsApp()">Deel resultaat 💬</button>
+    <div id="out"></div>
+    <button class="whatsapp-btn" onclick="share()">Deel resultaat 💬</button>
 </div>
 <div class="seo-content">
-    <p>Bereken met de <strong>dagen teller</strong> hoeveel nachtjes het nog slapen is tot je vakantie of kerst.</p>
+    <p>Hoeveel nachtjes slapen nog? Bereken het razendsnel met de RandomRadar teller.</p>
 </div>
 <script>
     document.getElementById('start').valueAsDate = new Date();
@@ -42,22 +44,15 @@
         const e = new Date(document.getElementById('eind').value);
         const diff = Math.ceil((e - s) / (1000 * 60 * 60 * 24));
         const out = document.getElementById('out');
-        if(isNaN(diff)) return alert("Kies data!");
-        
         out.style.display = 'block';
         let i = 0;
         const timer = setInterval(() => {
             out.innerText = "Nog " + Math.floor(Math.random() * 100) + " dagen";
             i++;
-            if(i > 10) {
-                clearInterval(timer);
-                out.innerText = "Nog " + diff + " dagen te gaan!";
-            }
+            if(i > 10) { clearInterval(timer); out.innerText = "Nog " + diff + " dagen te gaan!"; }
         }, 50);
     }
-    function shareWhatsApp() {
-        window.open("https://wa.me/?text=Check dit verschil in dagen: " + window.location.href);
-    }
+    function share() { window.open("https://wa.me/?text=Check dit: " + window.location.href); }
 </script>
 </body>
 </html>
