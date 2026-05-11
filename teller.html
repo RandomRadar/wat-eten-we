@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dagen Teller | RandomRadar</title>
+    <title>Dagen Teller | Bereken het aantal dagen tussen data - RandomRadar</title>
+    <meta name="description" content="Eenvoudig dagen tellen tussen twee datums. Bereken hoeveel dagen het nog is tot je vakantie, Kerstmis of je verjaardag.">
     <style>
         :root { --primary: #f36d21; --dark: #2c3e50; }
         body { font-family: sans-serif; background: #f5f5f5; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
@@ -11,9 +12,10 @@
         nav a { text-decoration: none; color: var(--dark); font-weight: bold; font-size: 0.85rem; padding: 8px 12px; border-radius: 5px; }
         nav a.active { background: var(--primary); color: white; }
         .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 90%; margin-top: 40px; border-top: 5px solid var(--primary); }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; }
-        .res { margin-top: 20px; font-weight: bold; color: var(--primary); display: none; }
+        .res { margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: var(--primary); display: none; background: #fff8f4; padding: 15px; border-radius: 10px; }
+        .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.9rem; color: #666; }
     </style>
 </head>
 <body>
@@ -24,10 +26,15 @@
 </nav>
 <div class="card">
     <h1>Dagen Teller 📅</h1>
+    <p>Bereken het verschil tussen twee datums.</p>
     <input type="date" id="start">
     <input type="date" id="eind">
-    <button onclick="reken()">BEREKEN</button>
+    <button onclick="reken()">BEREKEN DAGEN</button>
     <div id="out" class="res"></div>
+</div>
+<div class="seo-content">
+    <h2>Hoeveel dagen nog tot...?</h2>
+    <p>Met onze <strong>dagen teller</strong> bereken je binnen één seconde hoeveel dagen er nog zitten tussen vandaag en een belangrijke gebeurtenis. Of je nu wilt weten hoeveel nachtjes het nog slapen is tot je vakantie, of hoeveel werkdagen er nog over zijn in de maand, deze calculator geeft je direct het antwoord.</p>
 </div>
 <script>
     document.getElementById('start').valueAsDate = new Date();
@@ -36,7 +43,8 @@
         const e = new Date(document.getElementById('eind').value);
         const diff = Math.ceil((e - s) / (1000 * 60 * 60 * 24));
         const out = document.getElementById('out');
-        out.innerText = "Totaal dagen: " + diff;
+        if(isNaN(diff)) return alert("Kies twee geldige datums!");
+        out.innerText = "Nog " + diff + " dagen te gaan!";
         out.style.display = 'block';
     }
 </script>
