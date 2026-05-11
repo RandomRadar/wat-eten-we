@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wie Moet Het Doen? | RandomRadar</title>
+    <title>Wie moet het doen? | Namen Loten & Loting Generator - RandomRadar</title>
+    <meta name="description" content="Eenvoudig namen loten voor taken, ritten of spellen. Voer de namen in en de radar kiest willekeurig wie er aan de beurt is.">
     <style>
         :root { --primary: #f36d21; --dark: #2c3e50; }
         body { font-family: sans-serif; background: #f5f5f5; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
@@ -11,9 +12,10 @@
         nav a { text-decoration: none; color: var(--dark); font-weight: bold; font-size: 0.85rem; padding: 8px 12px; border-radius: 5px; }
         nav a.active { background: var(--primary); color: white; }
         .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 90%; margin-top: 40px; border-top: 5px solid var(--primary); }
-        textarea { width: 100%; height: 80px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; padding: 10px; box-sizing: border-box; }
-        #winnaar { font-size: 1.5rem; font-weight: bold; color: var(--primary); margin: 20px 0; }
+        textarea { width: 100%; height: 80px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; padding: 10px; box-sizing: border-box; font-family: inherit; }
+        #winnaar { font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 20px 0; min-height: 1.5em; }
         button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; }
+        .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.9rem; color: #666; }
     </style>
 </head>
 <body>
@@ -23,16 +25,24 @@
     <a href="wie.html" class="active">🎯 Wie?</a>
 </nav>
 <div class="card">
-    <h1>Wie Moet Het Doen? 🎯</h1>
-    <textarea id="lijst" placeholder="Naam 1, Naam 2..."></textarea>
+    <h1>Wie is de Sjaak? 🎯</h1>
+    <p>Wie moet er rijden? Wie doet de afwas?</p>
+    <textarea id="lijst" placeholder="Typ namen (Jan, Marie, Piet...)"></textarea>
     <div id="winnaar">...</div>
-    <button onclick="loot()">START RADAR</button>
+    <button onclick="loot()">LAAT DE RADAR KIEZEN</button>
+</div>
+<div class="seo-content">
+    <h2>Online namen loten en keuzes maken</h2>
+    <p>Wil je eerlijk <strong>namen loten</strong> voor een taakje of een spel? Onze <strong>loting generator</strong> is de snelste manier om een willekeurige winnaar (of verliezer) aan te wijzen. Ideaal voor vriendengroepen die willen beslissen wie er moet rijden, of voor op het werk om te bepalen wie de volgende meeting begint.</p>
 </div>
 <script>
     function loot() {
         const n = document.getElementById("lijst").value.split(',').map(x => x.trim()).filter(x => x !== "");
-        if(n.length < 2) return alert("Vul minstens 2 namen in!");
-        document.getElementById("winnaar").innerText = "👉 " + n[Math.floor(Math.random() * n.length)];
+        if(n.length < 2) return alert("Vul minstens 2 namen in gescheiden door een komma!");
+        document.getElementById("winnaar").innerText = "De radar kiest...";
+        setTimeout(() => {
+            document.getElementById("winnaar").innerText = "👉 " + n[Math.floor(Math.random() * n.length)];
+        }, 600);
     }
 </script>
 </body>
