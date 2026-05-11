@@ -3,182 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wat eten we vanavond? | RandomRadar</title>
+    <title>Wat Eten We? | RandomRadar</title>
     <style>
-        :root {
-            --primary: #f36d21;
-            --primary-dark: #d35400;
-            --bg-light: #fdfdfd;
-            --text-dark: #2c3e50;
-            --text-light: #7f8c8d;
-        }
+        :root { --primary: #f36d21; --dark: #2c3e50; }
+        body { font-family: sans-serif; background: #f5f5f5; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        /* Het Menu */
+        nav { background: white; width: 100%; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; position: sticky; top: 0; z-index: 100; }
+        nav a { text-decoration: none; color: var(--dark); font-weight: bold; font-size: 0.9rem; padding: 8px 15px; border-radius: 5px; transition: 0.3s; }
+        nav a.active { background: var(--primary); color: white; }
+        nav a:hover:not(.active) { background: #eee; }
 
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #f5f5f5;
-            background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
-            color: var(--text-dark);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .card {
-            background: white;
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 480px;
-            width: 90%;
-            border-top: 6px solid var(--primary);
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
-            color: var(--text-dark);
-        }
-
-        .subtitle {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        #display-container {
-            background: #fcfcfc;
-            height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            border: 2px solid #eee;
-            position: relative;
-        }
-
-        #uitkomst {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            padding: 0 20px;
-        }
-
-        .btn-main {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 20px 40px;
-            font-size: 1.3rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-            width: 100%;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 0 var(--primary-dark);
-        }
-
-        .btn-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 var(--primary-dark);
-        }
-
-        .btn-main:active {
-            transform: translateY(2px);
-            box-shadow: 0 0px 0 var(--primary-dark);
-        }
-
-        .btn-whatsapp {
-            display: none;
-            margin-top: 1.5rem;
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            text-align: center;
-        }
-
-        .seo-footer {
-            margin-top: 4rem;
-            max-width: 600px;
-            padding: 20px;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 1.8rem; }
-            .card { padding: 2rem; }
-        }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 90%; margin-top: 50px; border-top: 5px solid var(--primary); }
+        h1 { color: var(--dark); margin-bottom: 20px; }
+        #resultaat { font-size: 1.5rem; font-weight: bold; color: var(--primary); min-height: 1.5em; margin: 20px 0; }
+        button { background: var(--primary); color: white; border: none; padding: 15px 30px; font-size: 1.1rem; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; }
+        button:hover { background: #d35400; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>Wat eten we vandaag?</h1>
-    <p class="subtitle">Geen keuzestress meer voor RandomRadar. Klik en eet!</p>
-    
-    <div id="display-container">
-        <p id="uitkomst">Kies een maaltijd...</p>
-    </div>
+<nav>
+    <a href="index.html" class="active">🍴 Wat eten we?</a>
+    <a href="teller.html">📅 Dagen Teller</a>
+</nav>
 
-    <button class="btn-main" onclick="kiesMaaltijd()">GEEF ME EEN IDEE</button>
-    <button id="whatsapp-btn" class="btn-whatsapp" onclick="deelResultaat()">Deel dit idee op WhatsApp 📱</button>
+<div class="card">
+    <h1>Wat eten we? 🍴</h1>
+    <div id="resultaat">Klik op de knop!</div>
+    <button onclick="kiesEten()">GENEREER MAALTIJD</button>
 </div>
 
-<section class="seo-footer">
-    <p>
-        Heb je <strong>geen inspiratie voor het avondeten</strong>? Gebruik de RandomRadar <strong>wat eten we generator</strong>. 
-        Van snelle hap tot klassieke gerechten, onze tool helpt je direct beslissen wat er op tafel komt.
-    </p>
-</section>
-
 <script>
-    function kiesMaaltijd() {
-        const maaltijden = [
-            "Pizza 🍕", "Pasta Carbonara 🍝", "Sushi 🍣", "Frietjes van de frituur 🍟",
-            "Burgers 🍔", "Thais 🍛", "Stoemp 🥔", "Pannenkoeken 🥞",
-            "Taco's 🌮", "Poke Bowl 🥣", "Kebab 🥙", "Spaghetti Bolognese 🍝",
-            "Lasagne 🥘", "Pasta met scampi 🍤", "McDonald's 🍔", "Grieks 🇬🇷",
-            "Uit eten gaan ✨", "Chinees 🥡", "Burger King 👑", "Wraps 🌯", "KFC 🍗"
-        ];
-
-        const display = document.getElementById('uitkomst');
-        const waBtn = document.getElementById('whatsapp-btn');
-        const mainBtn = document.querySelector('.btn-main');
-        
-        mainBtn.disabled = true;
-        let c = 0;
-        
-        const loop = setInterval(() => {
-            display.innerText = maaltijden[Math.floor(Math.random() * maaltijden.length)];
-            c++;
-            if (c > 15) {
-                clearInterval(loop);
-                display.innerText = maaltijden[Math.floor(Math.random() * maaltijden.length)];
-                mainBtn.disabled = false;
-                waBtn.style.display = 'block';
-            }
-        }, 70);
-    }
-
-    function deelResultaat() {
-        const keuze = document.getElementById('uitkomst').innerText;
-        const tekst = "RandomRadar heeft beslist! We eten: " + keuze + ". Check het hier: " + window.location.href;
-        window.open("https://wa.me/?text=" + encodeURIComponent(tekst), '_blank');
+    const opties = ["Pizza 🍕", "Pasta 🍝", "Sushi 🍣", "Frietjes 🍟", "Slaatje 🥗", "Taco's 🌮", "Wok 🥢", "Pannenkoeken 🥞", "Burgers 🍔", "Stoemp met worst 🥘"];
+    function kiesEten() {
+        const r = document.getElementById("resultaat");
+        r.innerText = "De radar draait...";
+        setTimeout(() => {
+            const keuze = opties[Math.floor(Math.random() * opties.length)];
+            r.innerText = keuze;
+        }, 500);
     }
 </script>
 
