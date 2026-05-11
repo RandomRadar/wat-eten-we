@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dagen Teller | Bereken het aantal dagen tussen data - RandomRadar</title>
-    <meta name="description" content="Eenvoudig dagen tellen tussen twee datums. Bereken hoeveel dagen het nog is tot je vakantie, Kerstmis of je verjaardag.">
+    <title>Dagen Teller | Hoeveel dagen tot mijn vakantie? - RandomRadar</title>
+    <meta name="description" content="Bereken eenvoudig het aantal dagen tussen twee datums. Perfect voor het aftellen naar je vakantie, kerstmis of een verjaardag.">
     <style>
-        :root { --primary: #f36d21; --dark: #2c3e50; }
-        body { font-family: sans-serif; background: #f5f5f5; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        :root { --primary: #f36d21; --dark: #2c3e50; --whatsapp: #25D366; }
+        body { font-family: sans-serif; background: #f5f5f5; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; color: #333; }
         nav { background: white; width: 100%; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
         nav a { text-decoration: none; color: var(--dark); font-weight: bold; font-size: 0.85rem; padding: 8px 12px; border-radius: 5px; }
         nav a.active { background: var(--primary); color: white; }
         .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 90%; margin-top: 40px; border-top: 5px solid var(--primary); }
         input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; }
+        button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1rem; }
         .res { margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: var(--primary); display: none; background: #fff8f4; padding: 15px; border-radius: 10px; }
+        .whatsapp-btn { margin-top: 20px; background: var(--whatsapp); color: white; padding: 12px; font-size: 0.9rem; cursor: pointer; border-radius: 10px; border: none; width: 100%; font-weight: bold; }
         .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.9rem; color: #666; }
     </style>
 </head>
@@ -31,10 +32,11 @@
     <input type="date" id="eind">
     <button onclick="reken()">BEREKEN DAGEN</button>
     <div id="out" class="res"></div>
+    <button class="whatsapp-btn" onclick="shareWhatsApp()">Deel resultaat via WhatsApp 💬</button>
 </div>
 <div class="seo-content">
-    <h2>Hoeveel dagen nog tot...?</h2>
-    <p>Met onze <strong>dagen teller</strong> bereken je binnen één seconde hoeveel dagen er nog zitten tussen vandaag en een belangrijke gebeurtenis. Of je nu wilt weten hoeveel nachtjes het nog slapen is tot je vakantie, of hoeveel werkdagen er nog over zijn in de maand, deze calculator geeft je direct het antwoord.</p>
+    <h2>Hoeveel dagen nog tot je vakantie?</h2>
+    <p>Wil je weten <strong>hoeveel nachtjes het nog slapen is</strong> tot je vakantie, kerstmis of je volgende verjaardag? Met onze online <strong>dagen teller</strong> bereken je razendsnel het exacte verschil tussen twee datums. Handig voor het plannen van projecten of gewoon om de voorpret van een leuk uitje te vergroten!</p>
 </div>
 <script>
     document.getElementById('start').valueAsDate = new Date();
@@ -46,6 +48,10 @@
         if(isNaN(diff)) return alert("Kies twee geldige datums!");
         out.innerText = "Nog " + diff + " dagen te gaan!";
         out.style.display = 'block';
+    }
+    function shareWhatsApp() {
+        const text = "Ik heb berekend hoeveel dagen het nog is! Check het hier: " + window.location.href;
+        window.open("https://wa.me/?text=" + encodeURIComponent(text));
     }
 </script>
 </body>
