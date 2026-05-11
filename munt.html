@@ -29,11 +29,17 @@
     <button onclick="go()">GOOI MUNT</button>
 </div>
 <script>
+    let vorigMunt = "";
     function go() {
         let c = 0;
         const t = setInterval(() => {
             document.getElementById("res").innerText = Math.random() > 0.5 ? "KOP" : "MUNT";
-            c++; if(c>15) clearInterval(t);
+            if(++c>15) {
+                clearInterval(t);
+                let n = Math.random() > 0.5 ? "KOP" : "MUNT";
+                if(n === vorigMunt) n = (vorigMunt === "KOP") ? "MUNT" : "KOP";
+                vorigMunt = n; document.getElementById("res").innerText = n;
+            }
         }, 60);
     }
 </script>
