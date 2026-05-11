@@ -11,11 +11,10 @@
         nav a { text-decoration: none; color: #888; font-weight: bold; font-size: 0.75rem; padding: 8px 10px; border-radius: 5px; }
         nav a.active { background: var(--primary); color: white; }
         .card { background: var(--card); padding: 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center; max-width: 400px; width: 90%; margin-top: 30px; border-bottom: 5px solid var(--primary); }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #444; border-radius: 8px; background: #333; color: white; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #444; border-radius: 8px; background: #333; color: white; outline: none; }
         button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1rem; }
         #out { margin-top: 20px; font-size: 1.5rem; font-weight: bold; color: var(--primary); background: #3a3a3a; padding: 15px; border-radius: 10px; display: none; }
         .whatsapp-btn { margin-top: 20px; background: var(--whatsapp); color: white; padding: 12px; font-size: 0.9rem; cursor: pointer; border-radius: 10px; border: none; width: 100%; font-weight: bold; }
-        .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.85rem; color: #aaa; border-top: 1px solid #333; padding-top: 20px; }
     </style>
 </head>
 <body>
@@ -28,28 +27,25 @@
 </nav>
 <div class="card">
     <h1>Dagen Teller 📅</h1>
-    <input type="date" id="start">
-    <input type="date" id="eind">
+    <label>Vanaf:</label><input type="date" id="start">
+    <label>Tot:</label><input type="date" id="eind">
     <button onclick="reken()">BEREKEN DAGEN</button>
     <div id="out"></div>
     <button class="whatsapp-btn" onclick="share()">Deel resultaat 💬</button>
-</div>
-<div class="seo-content">
-    <p>Hoeveel nachtjes slapen nog? Bereken het razendsnel met de RandomRadar teller.</p>
 </div>
 <script>
     document.getElementById('start').valueAsDate = new Date();
     function reken() {
         const s = new Date(document.getElementById('start').value);
         const e = new Date(document.getElementById('eind').value);
-        const diff = Math.ceil((e - s) / (1000 * 60 * 60 * 24));
+        const diff = Math.ceil((e - s) / (86400000));
         const out = document.getElementById('out');
+        if(isNaN(diff)) return alert("Kies twee data!");
         out.style.display = 'block';
         let i = 0;
-        const timer = setInterval(() => {
+        const t = setInterval(() => {
             out.innerText = "Nog " + Math.floor(Math.random() * 100) + " dagen";
-            i++;
-            if(i > 10) { clearInterval(timer); out.innerText = "Nog " + diff + " dagen te gaan!"; }
+            if(++i > 10) { clearInterval(t); out.innerText = "Nog " + diff + " dagen te gaan!"; }
         }, 50);
     }
     function share() { window.open("https://wa.me/?text=Check dit: " + window.location.href); }
