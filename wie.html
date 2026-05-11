@@ -1,31 +1,4 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wie is de Chinese vrijwilliger? | Namen Loot Tool - RandomRadar</title>
-    <style>
-        :root { --primary: #f36d21; --bg: #1a1a1a; --card: #2d2d2d; --text: #eeeeee; --whatsapp: #25D366; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; color: var(--text); }
-        nav { background: #111; width: 100%; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.5); display: flex; justify-content: center; gap: 8px; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
-        nav a { text-decoration: none; color: #888; font-weight: bold; font-size: 0.75rem; padding: 8px 10px; border-radius: 5px; }
-        nav a.active { background: var(--primary); color: white; }
-        .card { background: var(--card); padding: 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center; max-width: 400px; width: 90%; margin-top: 30px; border-bottom: 5px solid var(--primary); }
-        textarea { width: 100%; height: 80px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #444; padding: 10px; background: #333; color: white; font-family: inherit; outline: none; box-sizing: border-box; }
-        #winnaar { font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 20px 0; min-height: 1.5em; }
-        button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1rem; }
-        .whatsapp-btn { margin-top: 20px; background: var(--whatsapp); color: white; padding: 12px; font-size: 0.9rem; cursor: pointer; border-radius: 10px; border: none; width: 100%; font-weight: bold; }
-        .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.85rem; color: #aaa; border-top: 1px solid #333; padding-top: 20px; }
-    </style>
-</head>
-<body>
-<nav>
-    <a href="index.html">🍴 Eten</a>
-    <a href="teller.html">📅 Teller</a>
-    <a href="wie.html" class="active">🎯 Wie?</a>
-    <a href="doen.html">🎡 Doen?</a>
-    <a href="munt.html">🪙 Munt</a>
-</nav>
+<!-- ... (rest van de code blijft gelijk) ... -->
 <div class="card">
     <h1>Wie is de Chinese vrijwilliger? 🎯</h1>
     <textarea id="lijst" placeholder="Namen met komma's (bijv: Jan, An, Tom)..."></textarea>
@@ -33,25 +6,9 @@
     <button onclick="loot()">START LOTING</button>
     <button class="whatsapp-btn" onclick="share()">Deel resultaat 💬</button>
 </div>
+
 <div class="seo-content">
-    <p>Moet er iemand afwassen, trakteren of een taakje doen? Gebruik onze <strong>namen loot tool</strong> om eerlijk te beslissen wie de "Chinese vrijwilliger" is. Vul de namen in en laat het lot bepalen.</p>
+    <h2>Eerlijk namen loten voor elke situatie</h2>
+    <p>Moet er iemand afwassen, trakteren of een vervelend taakje doen? Gebruik onze <strong>namen loot tool</strong> om eerlijk te beslissen wie de "Chinese vrijwilliger" is. Vul simpelweg de namen van je vrienden, familie of collega's in en laat onze radar volledig willekeurig een winnaar (of verliezer) aanwijzen. Geen gedoe meer met papiertjes trekken!</p>
 </div>
-<script>
-    let vorigLid = "";
-    function loot() {
-        const n = document.getElementById("lijst").value.split(',').map(x => x.trim()).filter(x => x !== "");
-        if(n.length < 2) return alert("Vul minstens 2 namen in!");
-        let count = 0;
-        const i = setInterval(() => {
-            document.getElementById("winnaar").innerText = n[Math.floor(Math.random() * n.length)];
-            if(++count > 12) { 
-                clearInterval(i); 
-                let nieuw; do { nieuw = n[Math.floor(Math.random() * n.length)]; } while (nieuw === vorigLid && n.length > 1);
-                vorigLid = nieuw; document.getElementById("winnaar").innerText = "👉 " + nieuw; 
-            }
-        }, 70);
-    }
-    function share() { window.open("https://wa.me/?text=De radar heeft beslist: " + window.location.href); }
-</script>
-</body>
-</html>
+<!-- ... (script blijft gelijk) ... -->
