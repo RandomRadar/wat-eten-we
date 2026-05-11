@@ -15,7 +15,7 @@
         input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         button { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1rem; }
         .res { margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: var(--primary); display: none; background: #fff8f4; padding: 15px; border-radius: 10px; }
-        .whatsapp-btn { margin-top: 20px; background: var(--whatsapp); color: white; padding: 12px; font-size: 0.9rem; cursor: pointer; border-radius: 10px; border: none; width: 100%; font-weight: bold; }
+        .whatsapp-btn { margin-top: 20px; background: var(--whatsapp); color: white; padding: 12px; font-size: 0.9rem; cursor: pointer; border-radius: 10px; border: none; width: 100%; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .seo-content { max-width: 500px; width: 90%; margin: 40px 0; line-height: 1.6; font-size: 0.9rem; color: #666; }
     </style>
 </head>
@@ -25,6 +25,7 @@
     <a href="teller.html" class="active">📅 Teller</a>
     <a href="wie.html">🎯 Wie?</a>
 </nav>
+
 <div class="card">
     <h1>Dagen Teller 📅</h1>
     <p>Bereken het verschil tussen twee datums.</p>
@@ -34,10 +35,12 @@
     <div id="out" class="res"></div>
     <button class="whatsapp-btn" onclick="shareWhatsApp()">Deel resultaat via WhatsApp 💬</button>
 </div>
+
 <div class="seo-content">
     <h2>Hoeveel dagen nog tot je vakantie?</h2>
     <p>Wil je weten <strong>hoeveel nachtjes het nog slapen is</strong> tot je vakantie, kerstmis of je volgende verjaardag? Met onze online <strong>dagen teller</strong> bereken je razendsnel het exacte verschil tussen twee datums. Handig voor het plannen van projecten of gewoon om de voorpret van een leuk uitje te vergroten!</p>
 </div>
+
 <script>
     document.getElementById('start').valueAsDate = new Date();
     function reken() {
